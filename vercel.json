@@ -7,8 +7,12 @@
   ],
   "routes": [
     {
+      "src": "^/(logo\\.jpg|favicon\\.ico)$",
+      "dest": "/public/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/api"
+      "dest": "/api/index.py"
     }
   ]
 }
