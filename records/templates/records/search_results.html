@@ -1,0 +1,47 @@
+{% extends 'records/base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-2">
+
+    <div class="flex flex-col sm:flex-row gap-4 mb-6">
+        <div>
+            <a href="/" class="text-indigo-600 text-sm">← Back</a>
+            <h1 class="text-xl sm:text-3xl font-bold">Results for "{{ query }}"</h1>
+            <p class="text-sm text-slate-500">{{ total_count }} results</p>
+        </div>
+    </div>
+
+    {% if results %}
+        {% for type, records in results.items %}
+        <div class="mb-6">
+            <h2 class="text-xs font-bold text-indigo-600 mb-2">{{ type }}</h2>
+
+            <div class="bg-white rounded-xl shadow border overflow-x-auto">
+                <table class="w-full min-w-[600px]">
+                    <tbody>
+                        {% for r in records %}
+                        <tr onclick="window.location.href='/record/{{ r.id }}/'" class="hover:bg-slate-50 cursor-pointer">
+                            <td class="px-4 sm:px-8 py-4">
+                                <div class="font-bold">{{ r.customer_name }}</div>
+                                <div class="text-xs text-gray-400">Added by {{ r.added_by }}</div>
+                            </td>
+                            <td class="px-4 sm:px-8 py-4">
+                                {{ r.start_no }} → {{ r.end_no }}
+                            </td>
+                            <td class="px-4 sm:px-8 py-4 text-right">
+                                {{ r.created_at|date:"d M Y" }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="text-center py-10">
+            <h3 class="text-lg font-bold">No results found</h3>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}  

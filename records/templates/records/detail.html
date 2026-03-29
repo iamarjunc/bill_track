@@ -1,0 +1,12 @@
+{% extends 'records/base.html' %}
+
+{% block content %}
+<div class="bg-white p-4 sm:p-6 rounded-xl shadow max-w-xl mx-auto mx-2 sm:mx-auto">
+    <h1 class="text-xl sm:text-2xl font-bold mb-4">{{ record.customer_name }}</h1>
+
+    <p><b>Type:</b> {{ record.bill_type }}</p>
+    <p><b>Range:</b> {{ record.start_no }} - {{ record.end_no }}</p>
+    <p><b>Added By:</b> {{ record.added_by }}</p>
+    <p><b>Date:</b> {{ record.created_at|date:"d M Y" }}</p>
+</div>
+{% endblock %}

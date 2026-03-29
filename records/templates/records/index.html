@@ -1,0 +1,84 @@
+{% extends 'records/base.html' %}
+
+{% block content %}
+
+<!-- 🔷 HEADER -->
+<div class="mb-8 px-2">
+    <h1 class="text-2xl sm:text-3xl font-black text-slate-900">Dashboard</h1>
+    <p class="text-slate-500 text-sm">Manage and track all bill records easily</p>
+</div>
+
+<!-- 🔷 STATS -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8 px-2">
+    <div class="bg-white p-4 rounded-xl shadow border">
+        <p class="text-xs text-slate-400">Total Records</p>
+        <h2 class="text-xl font-bold">{{ records|length }}</h2>
+    </div>
+
+    <div class="bg-white p-4 rounded-xl shadow border">
+        <p class="text-xs text-slate-400">Today</p>
+        <h2 class="text-xl font-bold">
+            {{ records.0.created_at|date:"d M" }}
+        </h2>
+    </div>
+
+    <div class="bg-white p-4 rounded-xl shadow border col-span-2 sm:col-span-1">
+        <p class="text-xs text-slate-400">Latest Customer</p>
+        <h2 class="text-sm font-bold truncate">
+            {{ records.0.customer_name }}
+        </h2>
+    </div>
+</div>
+
+<!-- 🔷 SEARCH -->
+<div class="mb-8 px-2">
+    <form action="{% url 'search_records' %}" method="GET" class="relative">
+        <input type="text" name="q"
+            placeholder="Search customer or bill number..."
+            class="w-full py-4 px-4 pr-4 sm:pr-32 rounded-2xl border shadow focus:ring-2 focus:ring-indigo-500">
+
+        <button type="submit"
+            class="mt-3 sm:mt-0 sm:absolute sm:right-2 sm:top-2 w-full sm:w-auto bg-indigo-600 text-white px-6 py-2 rounded-xl font-bold">
+            Search
+        </button>
+    </form>
+</div>
+
+<!-- 🔷 RECENT RECORDS (CARDS - MOBILE FIRST 🔥) -->
+<div class="px-2">
+    <h2 class="text-sm font-bold text-slate-400 mb-4">Recent Records</h2>
+
+    <div class="space-y-4">
+        {% for r in records %}
+        <div onclick="window.location.href='/record/{{ r.id }}/'"
+            class="bg-white p-4 rounded-xl shadow border hover:shadow-md cursor-pointer transition">
+
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="font-bold text-slate-800 truncate">
+                    {{ r.customer_name }}
+                </h3>
+                <span class="text-xs text-slate-400">
+                    {{ r.created_at|date:"d M" }}
+                </span>
+            </div>
+
+            <div class="text-sm text-slate-600">
+                <span class="font-semibold">{{ r.bill_type }}</span>
+                • {{ r.start_no }} → {{ r.end_no }}
+            </div>
+
+            <div class="text-xs text-slate-400 mt-1">
+                Added by {{ r.added_by }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- 🔷 FLOATING ADD BUTTON -->
+<a href="/add/"
+   class="fixed bottom-6 right-6 bg-indigo-600 hover:bg-indigo-700 text-white w-14 h-14 flex items-center justify-center rounded-full shadow-lg text-2xl">
+   +
+</a>
+
+{% endblock %}
