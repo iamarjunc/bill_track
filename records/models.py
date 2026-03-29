@@ -6,9 +6,10 @@ class BillRecord(models.Model):
     start_no = models.IntegerField()
     end_no = models.IntegerField()
 
-    # FIXED (migration issue)
-    added_by = models.CharField(max_length=50, default="Admin")
+    pages = models.IntegerField(default=0)
+    books = models.IntegerField(default=0)
 
+    added_by = models.CharField(max_length=50, default="Admin")
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

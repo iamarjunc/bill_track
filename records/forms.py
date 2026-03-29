@@ -1,7 +1,6 @@
 from django import forms
 from .models import BillRecord
 
-# Move this outside the class so it's accessible everywhere in the file
 INPUT_CLASSES = "block w-full px-4 py-3 rounded-lg border-slate-200 border focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-slate-700"
 
 class BillRecordForm(forms.ModelForm):
@@ -20,19 +19,23 @@ class BillRecordForm(forms.ModelForm):
 
     class Meta:
         model = BillRecord
-        fields = ['customer_name', 'bill_type', 'start_no', 'end_no', 'added_by']
+        fields = [
+            'customer_name',
+            'bill_type',
+            'start_no',
+            'end_no',
+            'pages',
+            'books',
+            'added_by'
+        ]
 
         widgets = {
-            'customer_name': forms.TextInput(attrs={
-                'class': INPUT_CLASSES, 
-                'placeholder': 'Enter customer name'
-            }),
-            'bill_type': forms.TextInput(attrs={
-                'class': INPUT_CLASSES, 
-                'placeholder': 'e.g. bill, raseet, etc.'
-            }),
+            'customer_name': forms.TextInput(attrs={'class': INPUT_CLASSES}),
+            'bill_type': forms.TextInput(attrs={'class': INPUT_CLASSES}),
             'start_no': forms.NumberInput(attrs={'class': INPUT_CLASSES}),
             'end_no': forms.NumberInput(attrs={'class': INPUT_CLASSES}),
+            'pages': forms.NumberInput(attrs={'class': INPUT_CLASSES}),
+            'books': forms.NumberInput(attrs={'class': INPUT_CLASSES}),
         }
 
     def clean(self):

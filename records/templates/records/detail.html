@@ -1,12 +1,28 @@
 {% extends 'records/base.html' %}
 
 {% block content %}
-<div class="bg-white p-4 sm:p-6 rounded-xl shadow max-w-xl mx-auto mx-2 sm:mx-auto">
-    <h1 class="text-xl sm:text-2xl font-bold mb-4">{{ record.customer_name }}</h1>
+<div class="bg-white p-6 rounded-xl shadow max-w-xl mx-auto">
+
+    <h1 class="text-2xl font-bold mb-4">{{ record.customer_name }}</h1>
 
     <p><b>Type:</b> {{ record.bill_type }}</p>
     <p><b>Range:</b> {{ record.start_no }} - {{ record.end_no }}</p>
+    <p><b>Size:</b> {{ record.pages }} × {{ record.books }}</p>
     <p><b>Added By:</b> {{ record.added_by }}</p>
     <p><b>Date:</b> {{ record.created_at|date:"d M Y" }}</p>
+
+    <div class="mt-4 flex gap-3">
+        <a href="/edit/{{ record.id }}/"
+           class="bg-yellow-500 text-white px-4 py-2 rounded-lg font-bold">
+           Edit
+        </a>
+
+        <a href="/delete/{{ record.id }}/"
+           class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold"
+           onclick="return confirm('Delete this record?')">
+           Delete
+        </a>
+    </div>
+
 </div>
 {% endblock %}
