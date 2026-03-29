@@ -1,14 +1,14 @@
 {
   "builds": [
     {
-      "src": "bill_tracker/asgi.py",
+      "src": "bill_tracker/bill_tracker/asgi.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "bill_tracker/asgi.py"
+      "dest": "bill_tracker/bill_tracker/asgi.py"
     }
   ]
 }
