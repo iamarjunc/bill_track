@@ -13,6 +13,10 @@ django.setup()
 from django.core.management import call_command
 call_command("migrate", interactive=False)
 
+from django.core.management import call_command
+
+call_command("collectstatic", interactive=False, verbosity=0)
+
 from django.core.asgi import get_asgi_application
 
 application = get_asgi_application()
