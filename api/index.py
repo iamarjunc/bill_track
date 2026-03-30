@@ -9,9 +9,6 @@ os.environ["DJANGO_SETTINGS_MODULE"] = "bill_tracker.settings"
 import django
 django.setup()
 
-from django.core.management import call_command
-call_command("migrate", interactive=False)
-
 from django.core.asgi import get_asgi_application
 
 application = get_asgi_application()
