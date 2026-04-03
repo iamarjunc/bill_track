@@ -83,15 +83,14 @@ WSGI_APPLICATION = "bill_tracker.wsgi.application"
 # }   
 
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'Davean#@1234564',
-        'HOST': 'db.gvnsmuxmpeczsguvflmn.supabase.co',
-        'PORT': '5432',
+        'HOST': 'aws-0-ap-south-1.pooler.supabase.com',
+        'PORT': '6543',
         'OPTIONS': {
             'sslmode': 'require',
         },
